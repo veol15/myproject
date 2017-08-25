@@ -41,6 +41,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::map_mouseMoveEvent(QMouseEvent *event)
 {
+    return;
     if( 1 )
     {
         internals::PointLatLng p;
@@ -48,4 +49,18 @@ void MainWindow::map_mouseMoveEvent(QMouseEvent *event)
         if( m_uav != NULL )
             m_uav->SetUAVPos(p, 460);
     }
+}
+
+void MainWindow::on_cacheMapBtn_clicked()
+{
+    internals::RectLatLng  rect;
+    rect = map->SelectedArea();
+    if( rect.IsEmpty() )
+    {
+        QMessageBox msgbox(QMessageBox::Warning,
+                           "Warning", "Please select an area first!");
+        msgbox.exec();
+        return;
+    }
+    map->RipMap();
 }

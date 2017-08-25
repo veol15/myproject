@@ -20,6 +20,9 @@ public slots:
     void map_mouseMoveEvent(QMouseEvent *event);
 protected:
     QSettings   *m_conf;
+private slots:
+    void on_cacheMapBtn_clicked();
+
 private:
     Ui::MainWindow *ui;
     MapWidget *map;

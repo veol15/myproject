@@ -39,8 +39,7 @@ MapRipper::MapRipper(internals::Core * core, const internals::RectLatLng & rect)
         area=rect;
         zoom=core->Zoom();
         maxzoom=core->MaxZoom();
-        points=core->Projection()->GetAreaTileList(area,zoom,0);
-        this->start();
+        points=core->Projection()->GetAreaTileList(area,zoom,0);        
         progressForm->show();
         progressForm->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
@@ -54,6 +53,7 @@ MapRipper::MapRipper(internals::Core * core, const internals::RectLatLng & rect)
                 this, SLOT(finish()));
 
         emit numberOfTilesChanged(0,0);
+        this->start();
     }
 }
 
@@ -107,7 +107,8 @@ void MapRipper::run()
     for(int i = 0; i < all; i++) {
         emit numberOfTilesChanged(all,i+1);
 
-        if( cancel ) break;
+        if( cancel )
+            break;
 
         core::Point p = points[i];
 
