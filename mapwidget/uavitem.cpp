@@ -37,7 +37,7 @@ UAVItem::UAVItem(MapGraphicItem* map,OPMapWidget* parent,QString uavPic) :
     trailtime(5), traildistance(5),
     autosetreached(true), autosetdistance(3)
 {
-    //QDir dir(":/uavs/images/");
+    //QDir dir(":/markers/images/");
     //QStringList list=dir.entryList();
     pic.load(uavPic);
     // Don't scale but trust the image we are given
@@ -221,7 +221,7 @@ double UAVItem::Distance3D(const internals::PointLatLng &coord, const int &altit
 
 void UAVItem::SetUavPic(QString UAVPic)
 {
-    pic.load(":/uavs/images/"+UAVPic);
+    pic.load(":/markers/images/"+UAVPic);
 }
 
 } // end of namespace mapcontrol

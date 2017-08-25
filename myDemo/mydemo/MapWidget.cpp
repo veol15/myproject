@@ -97,7 +97,7 @@ MapType_Dialog::MapType_Dialog(QWidget *parent) : QDialog(parent)
     setupUi();
 
     setupMapType_list();
-    setMapType(core::MapType::BingMap);
+    setMapType(core::MapType::GoogleMap);
 }
 
 void MapType_Dialog::setupUi(void)
@@ -426,7 +426,7 @@ MapWidget::MapWidget(QWidget *parent) :
 {
     m_conf = NULL;
 
-    configuration->SetAccessMode(core::AccessMode::CacheOnly);
+    configuration->SetAccessMode(core::AccessMode::ServerAndCache);
     configuration->SetTileMemorySize(200);
     configuration->SetCacheLocation("./data/");
 
@@ -598,13 +598,13 @@ int MapWidget::setupMenu(void)
 
     m_actMapAccess_ServerAndCache = new QAction(tr("ServerAndCache"), this);
     m_actMapAccess_ServerAndCache->setCheckable(true);
-    m_actMapAccess_ServerAndCache->setChecked(false);
+    m_actMapAccess_ServerAndCache->setChecked(true);
     connect(m_actMapAccess_ServerAndCache, SIGNAL(triggered()),
             this, SLOT(actMapAccess_ServerAndCache()));
 
     m_actMapAccess_Cache = new QAction(tr("Cache"), this);
     m_actMapAccess_Cache->setCheckable(true);
-    m_actMapAccess_Cache->setChecked(true);
+    m_actMapAccess_Cache->setChecked(false);
     connect(m_actMapAccess_Cache, SIGNAL(triggered()),
             this, SLOT(actMapAccess_Cache()));
 
@@ -679,10 +679,24 @@ int MapWidget::setupMenu(void)
 
 void MapWidget::mousePressEvent(QMouseEvent *event)
 {
-    if( event->button() == Qt::RightButton ) {
+    if( event->button() == Qt::RightButton )
+    {
         m_popupMenu->popup(event->globalPos());
-    } else {
+    } else
+    {
         mapcontrol::OPMapWidget::mousePressEvent(event);
+    }
+}
+
+void MapWidget::mouseDoubleClickEvent(QMouseEvent *event)
+{
+    if( event->button() == Qt::LeftButton )
+    {
+        actWaypoint_add();
+    }
+    else
+    {
+        mapcontrol::OPMapWidget::mouseDoubleClickEvent(event);
     }
 }
 
@@ -818,7 +832,8 @@ void MapWidget::actWPEdit(int num, WayPointItem *wp)
     wpDialog.setReferenceAltitude(m_homeAlt);
     wpDialog.setWaypoints(idx, &wpMap);
 
-    if( QDialog::Accepted == wpDialog.exec() ) {
+    if( QDialog::Accepted == wpDialog.exec() )
+    {
         wpDialog.updateWaypoints();
     }
 }

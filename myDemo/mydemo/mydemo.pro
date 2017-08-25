@@ -51,3 +51,8 @@ LIBS += $$PWD/../../libs/libopmapwidgetd.a
 } else {
 LIBS += $$PWD/../../libs/libopmapwidget.a
 }
+
+RESOURCES += \
+    mydemo.qrc
+
+DISTFILES +=

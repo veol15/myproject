@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/markers">
+        <file>images/airplane.png</file>
+        <file>images/airplane.svg</file>
+        <file>images/bigMarkerGreen.png</file>
+        <file>images/compas.svg</file>
+        <file>images/dragons1.jpg</file>
+        <file>images/dragons2.jpeg</file>
+        <file>images/EasystarBlue.png</file>
+        <file>images/home.png</file>
+        <file>images/home.svg</file>
+        <file>images/home2.svg</file>
+        <file>images/mapquad.png</file>
+        <file>images/marker.png</file>
+    </qresource>
+</RCC>

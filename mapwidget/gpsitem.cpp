@@ -229,7 +229,7 @@ double GPSItem::Distance3D(const internals::PointLatLng &coord, const int &altit
 
 void GPSItem::SetUavPic(QString UAVPic)
 {
-    pic.load(":/uavs/images/"+UAVPic);
+    pic.load(":/markers/images/"+UAVPic);
 }
 
 } // end of namespace mapcontrol

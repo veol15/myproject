@@ -61,7 +61,7 @@ class GPSItem:public QObject,public QGraphicsItem
 
 public:
     enum { Type = UserType + 6 };
-    GPSItem(MapGraphicItem* map,OPMapWidget* parent, QString uavPic=QString::fromUtf8(":/uavs/images/mapquad.png"));
+    GPSItem(MapGraphicItem* map,OPMapWidget* parent, QString uavPic=QString::fromUtf8(":/markers/images/mapquad.png"));
     ~GPSItem();
 
     /**
