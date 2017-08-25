@@ -9,8 +9,10 @@ MainWindow::MainWindow(QWidget *parent) :
     m_conf = new QSettings("./data/myDemo.ini", QSettings::IniFormat);
     ui->setupUi(this);
 
-    map = new MapWidget;
-    ui->mapWgtLayoutH->addWidget(map);
+    map = new MapWidget(this);
+
+    map->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    ui->centralWgtLayoutH->insertWidget(0,map);
 
     map->SetShowUAV(true);
     map->SetShowHome(true);
@@ -19,7 +21,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(map, SIGNAL(mouseMove(QMouseEvent*)),
             this, SLOT(map_mouseMoveEvent(QMouseEvent*)));
 
-    double  lat, lng;
+    double  lat;
+    double  lng;
     int     zoom;
 
     lat  = m_conf->value("mapWidget_home_lat", 30).toDouble();
@@ -30,8 +33,6 @@ MainWindow::MainWindow(QWidget *parent) :
     map->SetCurrentPosition(p);
     map->SetZoom(zoom);
     map->setConf(m_conf);
-
-
 }
 
 MainWindow::~MainWindow()
@@ -42,7 +43,7 @@ MainWindow::~MainWindow()
 void MainWindow::map_mouseMoveEvent(QMouseEvent *event)
 {
     return;
-    if( 1 )
+    if(1)
     {
         internals::PointLatLng p;
         p = map->currentMousePosition();

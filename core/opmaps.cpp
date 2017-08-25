@@ -146,7 +146,7 @@ QByteArray OPMaps::GetImageFrom(const MapType::Types &type,const Point &pos,cons
             case MapType::GoogleTerrain:
             case MapType::GoogleHybrid:
             {
-                qheader.setRawHeader("Referrer", "http://www.google.cn/maps");
+                qheader.setRawHeader("Referrer", "https://maps.google.com");
             }
                 break;
 
@@ -156,7 +156,7 @@ QByteArray OPMaps::GetImageFrom(const MapType::Types &type,const Point &pos,cons
             case MapType::GoogleTerrainChina:
             case MapType::GoogleHybridChina:
             {
-                qheader.setRawHeader("Referrer", "http://www.google.cn/maps");
+                qheader.setRawHeader("Referrer", "http://ditu.google.cn/");
             }
                 break;
 

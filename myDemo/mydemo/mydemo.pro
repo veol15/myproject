@@ -31,15 +31,18 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     MapWidget.cpp \
-    UAS_types.cpp
+    UAS_types.cpp \
+    wayopwgt.cpp
 
 HEADERS += \
         mainwindow.h \
     MapWidget.h \
-    UAS_types.h
+    UAS_types.h \
+    wayopwgt.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    wayopwgt.ui
 
 OPMAPCONTROL_DIR = ../..
 INCLUDEPATH +=  $$OPMAPCONTROL_DIR \

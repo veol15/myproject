@@ -12,6 +12,7 @@
 #include <QLayout>
 #include <QTableWidget>
 #include <QCheckBox>
+#include "wayopwgt.h"
 using namespace mapcontrol;
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +35,8 @@ public:
     int  getWaypoints(AP_WPArray &wpa);
     int  setWaypoints(AP_WPArray &wpa);
 
-    void setFlightHeight(double h) {
+    void setFlightHeight(double h)
+    {
         m_flightHeight = h;
     }
 
@@ -103,6 +105,10 @@ public slots:
 protected:
     void mousePressEvent(QMouseEvent *event);
     void mouseDoubleClickEvent(QMouseEvent *event);
+    void resizeEvent(QResizeEvent *event);
+
+private:
+    WayOPWgt *m_pWayOPWgt;
 };
 
 

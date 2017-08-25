@@ -97,7 +97,7 @@ MapType_Dialog::MapType_Dialog(QWidget *parent) : QDialog(parent)
     setupUi();
 
     setupMapType_list();
-    setMapType(core::MapType::GoogleMap);
+    setMapType(core::MapType::GoogleHybridChina);
 }
 
 void MapType_Dialog::setupUi(void)
@@ -422,7 +422,8 @@ void WaypointEdit_Dialog::act_cbHeightAltitude_clicked(bool s)
 ////////////////////////////////////////////////////////////////////////////////
 
 MapWidget::MapWidget(QWidget *parent) :
-    mapcontrol::OPMapWidget(parent)
+    mapcontrol::OPMapWidget(parent),
+    m_pWayOPWgt(new WayOPWgt(this))
 {
     m_conf = NULL;
 
@@ -433,7 +434,7 @@ MapWidget::MapWidget(QWidget *parent) :
     SetZoom(4);
     SetMinZoom(4);
     SetMaxZoom(18);
-    SetMapType(MapType::BingMap);
+    SetMapType(MapType::GoogleHybridChina);
 
     // set initial values
     m_bSelectArea = 0;
@@ -470,9 +471,9 @@ void MapWidget::setConf(QSettings *conf)
 
         // load settings
         accessMode    = (core::AccessMode::Types) m_conf->value("mapWidget_accessMode",
-                                                                (int)(core::AccessMode::CacheOnly)).toInt();
+                                                                (int)(core::AccessMode::ServerAndCache)).toInt();
         mapType       = (MapType::Types) m_conf->value("mapWidget_mapType",
-                                                       (int)(MapType::GoogleSatellite)).toInt();
+                                                       (int)(MapType::GoogleHybridChina)).toInt();
         cacheLocation = m_conf->value("mapWidget_cacheLocation", "./data/").toString();
 
         // set configurations
@@ -698,6 +699,13 @@ void MapWidget::mouseDoubleClickEvent(QMouseEvent *event)
     {
         mapcontrol::OPMapWidget::mouseDoubleClickEvent(event);
     }
+}
+
+void MapWidget::resizeEvent(QResizeEvent *event)
+{
+    m_pWayOPWgt->setGeometry(this->width()-m_pWayOPWgt->width(), this->height()-m_pWayOPWgt->height(),
+                             m_pWayOPWgt->width(), m_pWayOPWgt->height());
+    mapcontrol::OPMapWidget::resizeEvent(event);
 }
 
 
