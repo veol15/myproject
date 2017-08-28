@@ -59,6 +59,10 @@ namespace core {
         VersionGoogleSatelliteKorea = "66";
         VersionGoogleLabelsKorea = "kr1t.12";
 
+        // GaoDe version string
+        VersionGaoDeMap = "8";
+        VersionGaoDeSatellite = "6";
+
         /// <summary>
         /// Google Maps API generated using http://greatmaps.codeplex.com/
         /// from http://code.google.com/intl/en-us/apis/maps/signup.html

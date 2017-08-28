@@ -22,6 +22,10 @@ struct MapType_Data
 
 static MapType_Data g_arrMapType[] =
 {
+    MAPTYPE_STRUCT(GaoDeMap),
+    MAPTYPE_STRUCT(GaoDeSatellite),
+    MAPTYPE_STRUCT(GaoDeHybrid),
+
     MAPTYPE_STRUCT(GoogleMap),
     MAPTYPE_STRUCT(GoogleSatellite),
     MAPTYPE_STRUCT(GoogleLabels),

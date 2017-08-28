@@ -159,6 +159,14 @@ QByteArray OPMaps::GetImageFrom(const MapType::Types &type,const Point &pos,cons
                 qheader.setRawHeader("Referrer", "http://ditu.google.cn/");
             }
                 break;
+            case MapType::GaoDeMap:
+            case MapType::GaoDeLabels:
+            case MapType::GaoDeSatellite:
+            case MapType::GaoDeHybrid:
+            {
+                qheader.setRawHeader("Referrer", "http://ditu.amap.com/");
+            }
+                break;
 
             case MapType::BingHybrid:
             case MapType::BingMap:

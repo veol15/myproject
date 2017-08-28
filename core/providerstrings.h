@@ -55,6 +55,10 @@ namespace core {
         QString VersionGoogleSatelliteKorea;
         QString VersionGoogleLabelsKorea;
 
+        // GaoDe version string
+        QString VersionGaoDeMap;
+        QString VersionGaoDeSatellite;
+
         /// <summary>
         /// Google Maps API generated using http://greatmaps.codeplex.com/
         /// from http://code.google.com/intl/en-us/apis/maps/signup.html

@@ -103,7 +103,12 @@ public:
         GoogleHybridKorea=4005,
 
         YandexMapRu = 5000,
-        Statkart_Topo2 = 5500
+        Statkart_Topo2 = 5500,
+
+        GaoDeMap = 6000,
+        GaoDeLabels = 6001,
+        GaoDeSatellite = 6002,
+        GaoDeHybrid = 6003
     };
 
     static QString StrByType(Types const& value)

@@ -57,6 +57,11 @@ QVector<MapType::Types> AllLayersOfType::GetAllLayersOfType(const MapType::Types
             types.append(MapType::GoogleLabelsKorea);
             break;
 
+        case MapType::GaoDeHybrid:
+            types.append(MapType::GaoDeSatellite);
+            types.append(MapType::GaoDeLabels);
+            break;
+
         case MapType::YahooHybrid:
             types.append(MapType::YahooSatellite);
             types.append(MapType::YahooLabels);
