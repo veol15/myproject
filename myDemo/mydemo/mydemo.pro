@@ -32,13 +32,17 @@ SOURCES += \
         mainwindow.cpp \
     MapWidget.cpp \
     UAS_types.cpp \
-    wayopwgt.cpp
+    wayopwgt.cpp \
+    maptypedlg.cpp \
+    wpeditdlg.cpp
 
 HEADERS += \
         mainwindow.h \
     MapWidget.h \
     UAS_types.h \
-    wayopwgt.h
+    wayopwgt.h \
+    maptypedlg.h \
+    wpeditdlg.h
 
 FORMS += \
         mainwindow.ui \

@@ -7,421 +7,20 @@
 #include <QHeaderView>
 #include <QFileDialog>
 #include <QInputDialog>
+
 using namespace mapcontrol;
 
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-
-struct MapType_Data
-{
-    char    name[256];
-    int     typeID;
-};
-
-#define MAPTYPE_STRUCT(n)   { #n, core::MapType::n }
-
-static MapType_Data g_arrMapType[] =
-{
-    MAPTYPE_STRUCT(GaoDeMap),
-    MAPTYPE_STRUCT(GaoDeSatellite),
-    MAPTYPE_STRUCT(GaoDeLabels),
-    MAPTYPE_STRUCT(GaoDeHybrid),
-
-    MAPTYPE_STRUCT(GoogleMap),
-    MAPTYPE_STRUCT(GoogleSatellite),
-    MAPTYPE_STRUCT(GoogleLabels),
-    MAPTYPE_STRUCT(GoogleTerrain),
-    MAPTYPE_STRUCT(GoogleHybrid),
-
-    MAPTYPE_STRUCT(GoogleMapChina),
-    MAPTYPE_STRUCT(GoogleSatelliteChina),
-    MAPTYPE_STRUCT(GoogleLabelsChina),
-    MAPTYPE_STRUCT(GoogleTerrainChina),
-    MAPTYPE_STRUCT(GoogleHybridChina),
-
-    MAPTYPE_STRUCT(OpenStreetMap),
-    MAPTYPE_STRUCT(OpenStreetOsm),
-    MAPTYPE_STRUCT(OpenStreetMapSurfer),
-    MAPTYPE_STRUCT(OpenStreetMapSurferTerrain),
-
-    MAPTYPE_STRUCT(YahooMap),
-    MAPTYPE_STRUCT(YahooSatellite),
-    MAPTYPE_STRUCT(YahooLabels),
-    MAPTYPE_STRUCT(YahooHybrid),
-
-    MAPTYPE_STRUCT(BingMap),
-    MAPTYPE_STRUCT(BingSatellite),
-    MAPTYPE_STRUCT(BingHybrid),
-
-    MAPTYPE_STRUCT(ArcGIS_Map),
-    MAPTYPE_STRUCT(ArcGIS_Satellite),
-    MAPTYPE_STRUCT(ArcGIS_ShadedRelief),
-    MAPTYPE_STRUCT(ArcGIS_Terrain),
-    MAPTYPE_STRUCT(ArcGIS_WorldTopo),
-
-    MAPTYPE_STRUCT(ArcGIS_MapsLT_Map),
-    MAPTYPE_STRUCT(ArcGIS_MapsLT_OrtoFoto),
-    MAPTYPE_STRUCT(ArcGIS_MapsLT_Map_Labels),
-    MAPTYPE_STRUCT(ArcGIS_MapsLT_Map_Hybrid),
-
-    MAPTYPE_STRUCT(PergoTurkeyMap),
-    MAPTYPE_STRUCT(SigPacSpainMap),
-
-    MAPTYPE_STRUCT(GoogleMapKorea),
-    MAPTYPE_STRUCT(GoogleSatelliteKorea),
-    MAPTYPE_STRUCT(GoogleLabelsKorea),
-    MAPTYPE_STRUCT(GoogleHybridKorea),
-
-    MAPTYPE_STRUCT(YandexMapRu),
-    MAPTYPE_STRUCT(Statkart_Topo2),
-
-    {"NULL", -1}
-};
-
-char *getMapName_fromID(core::MapType::Types t)
-{
-    int     i = 0;
-
-    while(1) {
-        if( g_arrMapType[i].typeID == t )
-            return g_arrMapType[i].name;
-
-        if( g_arrMapType[i].typeID < 0 ) return NULL;
-
-        i ++;
-    }
-
-    return NULL;
-}
 
 
-MapType_Dialog::MapType_Dialog(QWidget *parent) : QDialog(parent)
-{
-    this->setWindowTitle("Select Map Type");
 
-    setupUi();
 
-    setupMapType_list();
-    setMapType(core::MapType::GoogleHybridChina);
-}
-
-void MapType_Dialog::setupUi(void)
-{
-    if (this->objectName().isEmpty())
-        this->setObjectName(QString::fromUtf8("MapWidget_MapTypeDiag"));
-    this->setFixedSize(374, 122);
-
-    buttonBox = new QDialogButtonBox(this);
-    buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
-    buttonBox->setGeometry(QRect(20, 80, 341, 32));
-    buttonBox->setOrientation(Qt::Horizontal);
-    buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
-
-    labMapType = new QLabel(this);
-    labMapType->setObjectName(QString::fromUtf8("labMapType"));
-    labMapType->setGeometry(QRect(32, 34, 61, 15));
-    labMapType->setText("Map Type:");
-
-    cbMapType = new QComboBox(this);
-    cbMapType->setObjectName(QString::fromUtf8("cbMapType"));
-    cbMapType->setGeometry(QRect(100, 30, 251, 25));
-
-    QObject::connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-    QObject::connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-
-    QMetaObject::connectSlotsByName(this);
-}
-
-void MapType_Dialog::setupMapType_list(void)
-{
-    int     i;
-
-    i = 0;
-    while(1) {
-        if( g_arrMapType[i].typeID >= 0 )
-            cbMapType->addItem(g_arrMapType[i].name);
-        else
-            break;
-
-        i ++;
-    }
-}
-
-void MapType_Dialog::setMapType(core::MapType::Types t)
-{
-    int i = 0;
-
-    while(1) {
-        if( g_arrMapType[i].typeID == t ) {
-            cbMapType->setCurrentIndex(i);
-            return;
-        }
-
-        if( g_arrMapType[i].typeID == -1 ) break;
-
-        i ++;
-    }
-
-    // set default map
-    cbMapType->setCurrentIndex(0);
-}
-
-core::MapType::Types MapType_Dialog::getMapType(void)
-{
-    int     idx, typeID;
-
-    idx    = cbMapType->currentIndex();
-    typeID = g_arrMapType[cbMapType->currentIndex()].typeID;
-
-    return (core::MapType::Types) typeID;
-}
 
 
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-WaypointEdit_Dialog::WaypointEdit_Dialog(QWidget *parent) : QDialog(parent)
-{
-    this->setWindowTitle("Waypoints Edit");
 
-    m_wpMap  = NULL;
-    m_wpIdx  = 0;
-
-    clCL1 = QColor(0x00, 0x00, 0xFF);
-    clCL2 = QColor(0x00, 0x00, 0x00);
-    clB1  = QColor(0xFF, 0xFF, 0xFF);
-    clB2  = QColor(0xE8, 0xE8, 0xE8);
-
-    fontSize  = 10;
-    rowHeight = 24;
-
-    m_bHeightAltitude = 1;
-    m_referenceAltitude = 440.0;
-
-    setupUi();
-}
-
-int WaypointEdit_Dialog::setWaypoints(int idx, QMap<int, mapcontrol::WayPointItem*> *wpMap,
-                                      int heightAltitude)
-{
-    m_wpIdx  = idx;
-    m_wpMap  = wpMap;
-    m_bHeightAltitude = heightAltitude;
-
-    // set height/altitude checkbox
-    if( heightAltitude ) {
-        cbHeightAltitude->setCheckState(Qt::Checked);
-    } else {
-        cbHeightAltitude->setCheckState(Qt::Unchecked);
-    }
-
-    // if edit all waypoints then disable checkbox of all waypoints
-    if( m_wpIdx < 0 ) cbAllWaypoints->setDisabled(true);
-
-    // set table items
-    setWaypoints_(idx, wpMap, heightAltitude);
-
-    return 0;
-}
-
-int WaypointEdit_Dialog::setWaypoints_(int idx,
-                                       QMap<int, mapcontrol::WayPointItem*> *wpMap,
-                                       int heightAltitude)
-{
-    if( heightAltitude ) {
-        tableWaypoints->horizontalHeaderItem(1)->setText("Height");
-    } else {
-        tableWaypoints->horizontalHeaderItem(1)->setText("Altitude");
-    }
-
-    // clear old contents
-    tableWaypoints->clearContents();
-
-    // insert items
-    double h;
-
-    if( idx >= 0 ) {
-        cbAllWaypoints->setCheckState(Qt::Unchecked);
-        tableWaypoints->setRowCount(1);
-
-        mapcontrol::WayPointItem *item;
-        item = wpMap->value(idx);
-
-        if( heightAltitude ) h = item->Altitude() - m_referenceAltitude;
-        else                 h = item->Altitude();
-
-        setTableItem(0, 0, QString("%1").arg(item->Number()));
-        setTableItem(0, 1, QString("%1").arg(h));
-        setTableItem(0, 2, QString("%1").arg(item->Heading()));
-
-        tableWaypoints->item(0, 0)->setFlags(Qt::ItemIsSelectable);
-        tableWaypoints->item(0, 2)->setToolTip("0:North, 90:East, 180:South, 270:West");
-    } else {
-        cbAllWaypoints->setCheckState(Qt::Checked);
-
-        QList<int> ids = wpMap->keys();
-        int        ri = 0;
-
-        tableWaypoints->setRowCount(ids.size());
-
-        foreach(int i, ids) {
-            mapcontrol::WayPointItem *item;
-            item = wpMap->value(i);
-
-            if( heightAltitude ) h = item->Altitude() - m_referenceAltitude;
-            else                 h = item->Altitude();
-
-            setTableItem(ri, 0, QString("%1").arg(item->Number()));
-            setTableItem(ri, 1, QString("%1").arg(h));
-            setTableItem(ri, 2, QString("%1").arg(item->Heading()));
-
-            tableWaypoints->item(ri, 0)->setFlags(Qt::ItemIsSelectable);
-            tableWaypoints->item(ri, 2)->setToolTip("0:North, 90:East, 180:South, 270:West");
-
-            ri++;
-        }
-    }
-
-    return 0;
-}
-
-int WaypointEdit_Dialog::setTableItem(int ri, int ci, QString s)
-{
-    if( tableWaypoints->item(ri, ci) != NULL ) {
-        tableWaypoints->item(ri, ci)->setText(s);
-    } else {
-        QTableWidgetItem* item = new QTableWidgetItem();
-        item->setText(s);
-
-        item->setTextColor(clCL2);
-        if( ri % 2 == 0 ) item->setBackgroundColor(clB1);
-        else              item->setBackgroundColor(clB2);
-
-        item->setFont(QFont("", fontSize));
-
-        tableWaypoints->setItem(ri, ci, item);
-        tableWaypoints->setRowHeight(ri, rowHeight);
-    }
-
-    return 0;
-}
-
-int WaypointEdit_Dialog::updateWaypoints(void)
-{
-    int     i, n;
-    int     heightAltitude;
-
-    int     idx;
-    double  alt, heading;
-
-    if( cbHeightAltitude->checkState() == Qt::Checked )
-        heightAltitude = 1;
-    else
-        heightAltitude = 0;
-
-    n = tableWaypoints->rowCount();
-    for(i=0; i<n; i++) {
-        idx     = tableWaypoints->item(i, 0)->text().toInt();
-        alt     = tableWaypoints->item(i, 1)->text().toDouble();
-        heading = tableWaypoints->item(i, 2)->text().toDouble();
-
-        if( heightAltitude ) alt += m_referenceAltitude;
-
-        m_wpMap->value(idx)->SetAltitude(alt);
-        m_wpMap->value(idx)->SetHeading(heading);
-    }
-
-    return 0;
-}
-
-void WaypointEdit_Dialog::setReferenceAltitude(double alt)
-{
-    m_referenceAltitude = alt;
-}
-
-double WaypointEdit_Dialog::getReferenceAltitude(void)
-{
-    return m_referenceAltitude;
-}
-
-void WaypointEdit_Dialog::setupUi(void)
-{
-    if (this->objectName().isEmpty())
-        this->setObjectName(QString::fromUtf8("Waypoint_EditDialog"));
-    this->resize(695, 439);
-
-    verticalLayout = new QVBoxLayout(this);
-    verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-
-    // waypoint edit table
-    tableWaypoints = new QTableWidget(this);
-    tableWaypoints->setObjectName(QString::fromUtf8("tableWaypoints"));
-    tableWaypoints->verticalHeader()->hide();
-    //tableWaypoints->horizontalHeader()->setResizeMode(QHeaderView::Interactive);
-    tableWaypoints->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft);
-    tableWaypoints->setColumnCount(3);
-    QStringList slHeader;
-    slHeader.append("Index");
-    slHeader.append("Altitude");
-    slHeader.append("Heading");
-    tableWaypoints->setHorizontalHeaderLabels(slHeader);
-
-    // all waypoint checkbox
-    cbAllWaypoints = new QCheckBox(this);
-    cbAllWaypoints->setObjectName(QString::fromUtf8("cbAllWaypoints"));
-    cbAllWaypoints->setText("All Waypoints");
-    connect(cbAllWaypoints, SIGNAL(clicked(bool)),
-            this, SLOT(act_cbAllWaypoints_clicked(bool)));
-
-    // height / altitude checkbox
-    cbHeightAltitude = new QCheckBox(this);
-    cbHeightAltitude->setObjectName(QString::fromUtf8("cbHeightAltitude"));
-    cbHeightAltitude->setText("Height / Altitude");
-    connect(cbHeightAltitude, SIGNAL(clicked(bool)),
-            this, SLOT(act_cbHeightAltitude_clicked(bool)));
-
-    // ok/cancle buttonbox
-    buttonBox = new QDialogButtonBox(this);
-    buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
-    buttonBox->setOrientation(Qt::Horizontal);
-    buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
-
-    verticalLayout->addWidget(tableWaypoints);
-    verticalLayout->addWidget(cbAllWaypoints);
-    verticalLayout->addWidget(cbHeightAltitude);
-    verticalLayout->addWidget(buttonBox);
-
-
-    QObject::connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-    QObject::connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-
-    QMetaObject::connectSlotsByName(this);
-}
-
-void WaypointEdit_Dialog::act_cbAllWaypoints_clicked(bool s)
-{
-    if( cbAllWaypoints->checkState() == Qt::Checked ) {
-        setWaypoints_(-1, m_wpMap, m_bHeightAltitude);
-    } else{
-        setWaypoints_(m_wpIdx, m_wpMap, m_bHeightAltitude);
-    }
-}
-
-void WaypointEdit_Dialog::act_cbHeightAltitude_clicked(bool s)
-{
-    if( cbHeightAltitude->checkState() == Qt::Checked ) {
-        m_bHeightAltitude = 1;
-    } else {
-        m_bHeightAltitude = 0;
-    }
-
-    if( cbAllWaypoints->checkState() == Qt::Checked ) {
-        setWaypoints_(-1, m_wpMap, m_bHeightAltitude);
-    } else {
-        setWaypoints_(m_wpIdx, m_wpMap, m_bHeightAltitude);
-    }
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -730,7 +329,7 @@ void MapWidget::resizeEvent(QResizeEvent *event)
 
 void MapWidget::actMapType_SelectMap(void)
 {
-    MapType_Dialog          diag;
+    MapTypeDlg          diag;
     core::MapType::Types    mt, mt0;
 
     // set current map type active
@@ -819,7 +418,7 @@ void MapWidget::actWaypoint_edit(void)
     QList<mapcontrol::WayPointItem*>        wpList;
     int                                     idx;
 
-    WaypointEdit_Dialog                     wpDialog;
+    WPEditDlg                     wpDialog;
 
     wpMap  = WPAll();
     wpList = WPSelected();
@@ -851,7 +450,7 @@ void MapWidget::actWPEdit(int num, WayPointItem *wp)
     QMap<int, mapcontrol::WayPointItem*>    wpMap;
     int                                     idx;
 
-    WaypointEdit_Dialog                     wpDialog;
+    WPEditDlg                     wpDialog;
 
     wpMap  = WPAll();
     idx    = num;

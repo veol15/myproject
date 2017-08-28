@@ -336,18 +336,21 @@ QString UrlFactory::MakeImageUrl(const MapType::Types &type,const Point &pos,con
         break;
     case MapType::GaoDeMap:
     {
-        //qDebug()<<QString("http://webst04.is.autonavi.com/appmaptile?x=%1&y=%2&z=%3&lang=zh_cn&size=1&scale=1&style=7").arg(pos.X()).arg( pos.Y()).arg(zoom);
-        return QString("http://webst04.is.autonavi.com/appmaptile?x=%1&y=%2&z=%3&lang=zh_cn&size=1&scale=1&style=7").arg(pos.X()).arg( pos.Y()).arg(zoom);
+        QString str = QString("http://webst04.is.autonavi.com/appmaptile?x=%1&y=%2&z=%3&lang=zh_cn&size=1&scale=1&style=7").arg(pos.X()).arg( pos.Y()).arg(zoom);
+        //qDebug()<<str;
+        return str ;
     }
     case MapType::GaoDeLabels:
     {
-        //qDebug()<<QString("http://webst04.is.autonavi.com/appmaptile?x=%1&y=%2&z=%3&lang=zh_cn&size=1&scale=1&style=8").arg(pos.X()).arg( pos.Y()).arg(zoom);
-        return QString("http://webst04.is.autonavi.com/appmaptile?x=%1&y=%2&z=%3&lang=zh_cn&size=1&scale=1&style=8").arg(pos.X()).arg( pos.Y()).arg(zoom);
+        QString str = QString("http://webst04.is.autonavi.com/appmaptile?x=%1&y=%2&z=%3&lang=zh_cn&size=1&scale=1&style=8").arg(pos.X()).arg( pos.Y()).arg(zoom);
+        //qDebug()<<str;
+        return str;
     }
     case MapType::GaoDeSatellite:
     {
-        //qDebug()<<QString("http://webst04.is.autonavi.com/appmaptile?x=%1&y=%2&z=%3&lang=zh_cn&size=1&scale=1&style=6").arg(pos.X()).arg( pos.Y()).arg(zoom);
-        return QString("http://webst04.is.autonavi.com/appmaptile?x=%1&y=%2&z=%3&lang=zh_cn&size=1&scale=1&style=6").arg(pos.X()).arg( pos.Y()).arg(zoom);
+        QString str = QString("http://webst04.is.autonavi.com/appmaptile?x=%1&y=%2&z=%3&lang=zh_cn&size=1&scale=1&style=6").arg(pos.X()).arg( pos.Y()).arg(zoom);
+        //qDebug()<<str;
+        return str;
     }
     case MapType::YahooMap:
     {

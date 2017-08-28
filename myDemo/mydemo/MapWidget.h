@@ -4,19 +4,15 @@
 #include <QtCore>
 #include <QtGui>
 
-#include <opmapwidget.h>
-
 #include "UAS_types.h"
-#include <QDialogButtonBox>
-#include <QComboBox>
 #include <QLayout>
 #include <QTableWidget>
 #include <QCheckBox>
 #include "wayopwgt.h"
-using namespace mapcontrol;
+#include "maptypedlg.h"
+#include "wpeditdlg.h"
 
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
+using namespace mapcontrol;
 
 class MapWidget : public OPMapWidget
 {
@@ -111,80 +107,5 @@ protected:
 private:
     WayOPWgt *m_pWayOPWgt;
 };
-
-
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-
-class MapType_Dialog : public QDialog
-{
-    Q_OBJECT
-
-public:
-    explicit MapType_Dialog(QWidget *parent = 0);
-
-    void setupUi(void);
-
-    void setupMapType_list(void);
-
-    void setMapType(core::MapType::Types t);
-    core::MapType::Types getMapType(void);
-
-public:
-    QDialogButtonBox        *buttonBox;
-    QLabel                  *labMapType;
-    QComboBox               *cbMapType;
-};
-
-
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-
-class WaypointEdit_Dialog : public QDialog
-{
-    Q_OBJECT
-
-public:
-    explicit WaypointEdit_Dialog(QWidget *parent = 0);
-
-    void setupUi(void);
-
-
-    int setWaypoints(int idx,
-                     QMap<int, mapcontrol::WayPointItem*> *wpMap,
-                     int heightAltitude = 1);
-    int setWaypoints_(int idx,
-                      QMap<int, mapcontrol::WayPointItem*> *wpMap,
-                      int heightAltitude);
-
-    int setTableItem(int ri, int ci, QString s);
-    int updateWaypoints(void);
-
-    void setReferenceAltitude(double alt);
-    double getReferenceAltitude(void);
-
-protected slots:
-    void act_cbAllWaypoints_clicked(bool s);
-    void act_cbHeightAltitude_clicked(bool s);
-
-private:
-    QVBoxLayout         *verticalLayout;
-    QTableWidget        *tableWaypoints;
-    QCheckBox           *cbAllWaypoints;
-    QCheckBox           *cbHeightAltitude;
-    QDialogButtonBox    *buttonBox;
-
-    QMap<int, mapcontrol::WayPointItem*>    *m_wpMap;       // waypoints map
-    int                                     m_wpIdx;        // active waypoint index
-
-    int                 m_bHeightAltitude;                  // height or altitude
-    double              m_referenceAltitude;                // home altitude (reference)
-
-    QColor              clCL1, clCL2;
-    QColor              clB1, clB2;
-    int                 fontSize;
-    int                 rowHeight;
-};
-
 
 #endif // end of __MAP_WIDGET_H__
