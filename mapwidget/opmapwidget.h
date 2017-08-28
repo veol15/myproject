@@ -526,6 +526,7 @@ protected:
 
     void ConnectWP(WayPointItem* item);
 
+    void paintEvent(QPaintEvent *event);
 
 signals:
     /**

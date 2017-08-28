@@ -450,6 +450,11 @@ void OPMapWidget::ConnectWP(WayPointItem *item)
     connect(this,SIGNAL(WPDeleted(int)),item,SLOT(WPDeleted(int)));
 }
 
+void OPMapWidget::paintEvent(QPaintEvent *event)
+{
+    QGraphicsView::paintEvent(event);
+}
+
 void OPMapWidget::diagRefresh()
 {
     if(showDiag) {

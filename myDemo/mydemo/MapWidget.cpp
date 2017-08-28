@@ -24,6 +24,7 @@ static MapType_Data g_arrMapType[] =
 {
     MAPTYPE_STRUCT(GaoDeMap),
     MAPTYPE_STRUCT(GaoDeSatellite),
+    MAPTYPE_STRUCT(GaoDeLabels),
     MAPTYPE_STRUCT(GaoDeHybrid),
 
     MAPTYPE_STRUCT(GoogleMap),
@@ -424,7 +425,21 @@ void WaypointEdit_Dialog::act_cbHeightAltitude_clicked(bool s)
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-
+void MapWidget::paintEvent(QPaintEvent *event)
+{
+    QMap<int, WayPointItem*> allItems = this->WPAll();
+    QPolygon polygon;
+    foreach (WayPointItem* item, allItems)
+    {
+        polygon << QPoint(item->Coord().Lat(), item->Coord().Lng());
+        qDebug()<<Q_FUNC_INFO<<item->Coord().Lat();
+        qDebug()<<Q_FUNC_INFO<<item->Coord().Lng();
+    }
+    QPainter painter(this);
+    painter.setBrush(Qt::green);
+    painter.drawConvexPolygon(polygon);
+    mapcontrol::OPMapWidget::paintEvent(event);
+}
 MapWidget::MapWidget(QWidget *parent) :
     mapcontrol::OPMapWidget(parent),
     m_pWayOPWgt(new WayOPWgt(this))
