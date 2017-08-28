@@ -188,12 +188,14 @@ void MapGraphicItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
 
         {
             DrawMap2D(painter);
+            DrawWPLine(painter);
         }
         painter->resetTransform();
     }
     else
     {
         DrawMap2D(painter);
+        DrawWPLine(painter);
     }
 }
 
@@ -459,6 +461,23 @@ void MapGraphicItem::DrawMap2D(QPainter *painter)
     //        painter->drawLine(-10,-10,10,10);
     //        painter->drawLine(10,10,-10,-10);
     //        painter->drawRect(boundingRect().adjusted(100,100,-100,-100));
+}
+
+void MapGraphicItem::DrawWPLine(QPainter *painter)
+{
+    this->update();
+    QPolygon polygon;
+    foreach(QGraphicsItem* i,this->childItems())
+    {
+        WayPointItem* w= qgraphicsitem_cast<WayPointItem*>(i);
+        if(w)
+        {
+            core::Point p = FromLatLngToLocal(w->Coord());
+            polygon << QPoint(p.X(),p.Y());
+        }
+    }
+    painter->setPen(QPen(Qt::green,2));
+    painter->drawConvexPolygon(polygon);
 }
 
 

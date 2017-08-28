@@ -42,8 +42,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::map_mouseMoveEvent(QMouseEvent *event)
 {
-    return;
-    if(1)
+    if(0)
     {
         internals::PointLatLng p;
         p = map->currentMousePosition();

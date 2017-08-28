@@ -40,6 +40,7 @@
 #include <QBrush>
 #include <QFont>
 #include <QObject>
+#include <QPolygon>
 #include "waypointitem.h"
 //#include "uavitem.h"
 
@@ -166,6 +167,7 @@ private:
     qreal MapRenderTransform;
 
     void DrawMap2D(QPainter *painter);
+    void DrawWPLine(QPainter *painter);
 
     /**
         * @brief Maximum possible zoom
