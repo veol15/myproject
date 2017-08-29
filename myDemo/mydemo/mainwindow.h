@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QSettings>
 #include "MapWidget.h"
+#include "waypointwgt.h"
 namespace Ui {
 class MainWindow;
 }
@@ -26,6 +27,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     MapWidget *map;
+    WayPointWgt m_wayPointWgt;
 
     mapcontrol::UAVItem         *m_uav;
 

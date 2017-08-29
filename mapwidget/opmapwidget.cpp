@@ -164,16 +164,19 @@ QGraphicsItemGroup* OPMapWidget::waypointLine(int id)
 
 void OPMapWidget::SetShowUAV(const bool &value)
 {
-    if( value && UAV==0 ) {
+    if( value && UAV==0 )
+    {
         UAV = new UAVItem(map,this);
         UAV->setParentItem(map);
-
         // FIXME XXX The map widget is here actually handling
         // safety and mission logic - might be worth some refactoring
         connect(this,SIGNAL(UAVLeftSafetyBouble(internals::PointLatLng)),UAV,SIGNAL(UAVLeftSafetyBouble(internals::PointLatLng)));
         connect(this,SIGNAL(UAVReachedWayPoint(int,WayPointItem*)),UAV,SIGNAL(UAVReachedWayPoint(int,WayPointItem*)));
-    } else if(!value) {
-        if(UAV!=0) {
+    }
+    else if(!value)
+    {
+        if(UAV!=0)
+        {
             UAV->DeleteTrail();
 
             delete UAV;
@@ -181,13 +184,16 @@ void OPMapWidget::SetShowUAV(const bool &value)
         }
     }
 
-    if( value && GPS==0 ) {
+    if( value && GPS==0 )
+    {
         GPS=new GPSItem(map,this);
         GPS->setParentItem(map);
-    } else if(!value) {
-        if(GPS!=0) {
+    }
+    else if(!value)
+    {
+        if(GPS!=0)
+        {
             GPS->DeleteTrail();
-
             delete GPS;
             GPS=0;
         }
@@ -486,7 +492,7 @@ void OPMapWidget::SetShowCompass(const bool &value)
         compass->setFlag(QGraphicsItem::ItemIsMovable,true);
         mscene.addItem(compass);
         compass->setTransformOriginPoint(compass->boundingRect().width()/2,compass->boundingRect().height()/2);
-        compass->setPos(55-compass->boundingRect().width()/2,55-compass->boundingRect().height()/2);
+        compass->setPos(66-compass->boundingRect().width()/2,66-compass->boundingRect().height()/2);
         compass->setZValue(3);
         compass->setOpacity(0.7);
     }

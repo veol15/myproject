@@ -12,7 +12,8 @@ MainWindow::MainWindow(QWidget *parent) :
     map = new MapWidget(this);
 
     map->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    ui->centralWgtLayoutH->insertWidget(0,map);
+    ui->hLayout2->insertWidget(0,map);
+    ui->hLayout2->insertWidget(1,&m_wayPointWgt);
 
     map->SetShowUAV(true);
     map->SetShowHome(true);

@@ -10,35 +10,6 @@
 
 using namespace mapcontrol;
 
-
-
-
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-
-
-
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-void MapWidget::paintEvent(QPaintEvent *event)
-{
-//    QMap<int, WayPointItem*> allItems = this->WPAll();
-//    QPolygon polygon;
-//    foreach (WayPointItem* item, allItems)
-//    {
-//        polygon << QPoint(item->Coord().Lat(), item->Coord().Lng());
-//        qDebug()<<Q_FUNC_INFO<<item->Coord().Lat();
-//        qDebug()<<Q_FUNC_INFO<<item->Coord().Lng();
-//    }
-//    QPainter painter(this);
-//    painter.setBrush(Qt::green);
-//    painter.drawConvexPolygon(polygon);
-    mapcontrol::OPMapWidget::paintEvent(event);
-}
 MapWidget::MapWidget(QWidget *parent) :
     mapcontrol::OPMapWidget(parent),
     m_pWayOPWgt(new WayOPWgt(this))
@@ -325,7 +296,10 @@ void MapWidget::resizeEvent(QResizeEvent *event)
                              m_pWayOPWgt->width(), m_pWayOPWgt->height());
     mapcontrol::OPMapWidget::resizeEvent(event);
 }
-
+void MapWidget::paintEvent(QPaintEvent *event)
+{
+    mapcontrol::OPMapWidget::paintEvent(event);
+}
 
 void MapWidget::actMapType_SelectMap(void)
 {
