@@ -23,7 +23,7 @@ MapWidget::MapWidget(QWidget *parent) :
     SetZoom(4);
     SetMinZoom(4);
     SetMaxZoom(18);
-    SetMapType(MapType::GoogleHybridChina);
+    SetMapType(MapType::GaoDeMap);
 
     // set initial values
     m_bSelectArea = 0;
@@ -32,7 +32,8 @@ MapWidget::MapWidget(QWidget *parent) :
 
     m_homeShow = 1;
     m_homeAlt = 440;
-    m_homePos.SetLat(-9999);        m_homePos.SetLng(-9999);
+    m_homePos.SetLat(-9999);
+    m_homePos.SetLng(-9999);
     m_homeSafearea = 100;
 
     m_flightHeight = 20;

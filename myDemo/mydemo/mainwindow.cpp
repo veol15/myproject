@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
 
-    m_conf = new QSettings("./data/myDemo.ini", QSettings::IniFormat);
+    m_conf = new QSettings(QCoreApplication::applicationDirPath() + "/data/myDemo.ini", QSettings::IniFormat);
     ui->setupUi(this);
 
     map = new MapWidget(this);
@@ -17,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     map->SetShowUAV(true);
     map->SetShowHome(true);
+    map->SetUseOpenGL(false);
 
     m_uav = map->AddUAV(0);
     connect(map, SIGNAL(mouseMove(QMouseEvent*)),

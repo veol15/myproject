@@ -32,7 +32,7 @@
 //#include "utils/pathutils.h"
 
 #include <QSettings>
-
+#include <QCoreApplication>
 namespace core {
 
 Cache* Cache::m_pInstance=0;
@@ -62,7 +62,7 @@ Cache::Cache()
 {
     if(cache.isNull()|cache.isEmpty())
     {
-        cache = QDir::homePath() + "/mapscache/";
+        cache = QCoreApplication::applicationDirPath() + "/mapscache/";
         setCacheLocation(cache);
     }
 }

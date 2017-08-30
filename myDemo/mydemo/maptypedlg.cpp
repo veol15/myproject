@@ -90,7 +90,7 @@ MapTypeDlg::MapTypeDlg(QWidget *parent) : QDialog(parent)
     setupUi();
 
     setupMapType_list();
-    setMapType(core::MapType::GoogleHybridChina);
+    setMapType(core::MapType::GaoDeMap);
 }
 
 void MapTypeDlg::setupUi(void)
