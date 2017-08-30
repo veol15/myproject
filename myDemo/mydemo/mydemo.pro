@@ -11,12 +11,15 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = mydemo
 TEMPLATE = app
 
+#UI_DIR       = ./UI
+#MOC_DIR      = ./MOC
+#OBJECTS_DIR  = ./OBJ
 
 CONFIG(debug, debug|release){
     TARGET = $$join(TARGET,,,d)
-    DESTDIR  += ../binDebug
+    DESTDIR  = $$PWD/../binDebug
 }else{
-    DESTDIR  += ../binRelease
+    DESTDIR  = $$PWD/../binRelease
 }
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked as deprecated (the exact warnings

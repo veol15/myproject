@@ -63,7 +63,7 @@ void MapWidget::setConf(QSettings *conf)
         accessMode    = (core::AccessMode::Types) m_conf->value("mapWidget_accessMode",
                                                                 (int)(core::AccessMode::ServerAndCache)).toInt();
         mapType       = (MapType::Types) m_conf->value("mapWidget_mapType",
-                                                       (int)(MapType::GoogleHybridChina)).toInt();
+                                                       (int)(MapType::GaoDeMap)).toInt();
         cacheLocation = m_conf->value("mapWidget_cacheLocation", "./data/").toString();
 
         // set configurations
