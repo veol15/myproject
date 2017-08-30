@@ -54,7 +54,7 @@ GPSItem::GPSItem(MapGraphicItem* map,OPMapWidget* parent,QString uavPic) :
 
 GPSItem::~GPSItem()
 {
-    delete trail;
+    //delete trail;
 }
 
 void GPSItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

@@ -13,4 +13,8 @@
         <file>images/mapquad.png</file>
         <file>images/marker.png</file>
     </qresource>
+    <qresource prefix="/">
+        <file>qss/dark.css</file>
+        <file>qss/light.css</file>
+    </qresource>
 </RCC>
