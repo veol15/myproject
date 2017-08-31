@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1288</width>
-    <height>665</height>
+    <width>1287</width>
+    <height>680</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -46,22 +46,22 @@
       </property>
       <layout class="QHBoxLayout" name="hLayout1">
        <property name="spacing">
-        <number>0</number>
+        <number>6</number>
        </property>
        <property name="leftMargin">
-        <number>0</number>
+        <number>9</number>
        </property>
        <property name="topMargin">
-        <number>0</number>
+        <number>2</number>
        </property>
        <property name="rightMargin">
-        <number>0</number>
+        <number>9</number>
        </property>
        <property name="bottomMargin">
-        <number>0</number>
+        <number>2</number>
        </property>
        <item>
-        <widget class="QToolButton" name="mainPageBtn">
+        <widget class="QPushButton" name="mainPageBtn">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
            <horstretch>0</horstretch>
@@ -73,12 +73,6 @@
          </property>
          <property name="checkable">
           <bool>true</bool>
-         </property>
-         <property name="toolButtonStyle">
-          <enum>Qt::ToolButtonIconOnly</enum>
-         </property>
-         <property name="arrowType">
-          <enum>Qt::NoArrow</enum>
          </property>
         </widget>
        </item>
@@ -177,6 +171,12 @@
           </item>
           <item>
            <widget class="QPushButton" name="cacheMapBtn">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="text">
              <string>Cache Map</string>
             </property>
@@ -186,7 +186,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QToolButton" name="toolButton_2">
+        <widget class="QPushButton" name="pushButton_2">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
            <horstretch>0</horstretch>
@@ -196,25 +196,49 @@
          <property name="text">
           <string>设置</string>
          </property>
-         <property name="popupMode">
-          <enum>QToolButton::DelayedPopup</enum>
-         </property>
-         <property name="toolButtonStyle">
-          <enum>Qt::ToolButtonTextOnly</enum>
-         </property>
-         <property name="autoRaise">
-          <bool>false</bool>
-         </property>
         </widget>
        </item>
       </layout>
      </widget>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="hLayout2">
+     <layout class="QHBoxLayout" name="centerHLayout">
       <property name="spacing">
        <number>0</number>
       </property>
+      <item>
+       <widget class="QWidget" name="rightWgt" native="true">
+        <property name="minimumSize">
+         <size>
+          <width>300</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>300</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <layout class="QVBoxLayout" name="rightVLayout">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+        </layout>
+       </widget>
+      </item>
      </layout>
     </item>
     <item>
@@ -239,19 +263,19 @@
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <property name="spacing">
-        <number>3</number>
+        <number>6</number>
        </property>
        <property name="leftMargin">
         <number>9</number>
        </property>
        <property name="topMargin">
-        <number>0</number>
+        <number>2</number>
        </property>
        <property name="rightMargin">
         <number>9</number>
        </property>
        <property name="bottomMargin">
-        <number>0</number>
+        <number>2</number>
        </property>
        <item>
         <widget class="QPushButton" name="returnVoyageBtn">

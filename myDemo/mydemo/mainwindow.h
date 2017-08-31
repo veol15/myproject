@@ -5,6 +5,7 @@
 #include <QSettings>
 #include "MapWidget.h"
 #include "waypointwgt.h"
+#include "videowgt.h"
 namespace Ui {
 class MainWindow;
 }
@@ -47,10 +48,13 @@ private slots:
 private:
     void setCurWorkMode(workMode mode);
     void hideAllWorkModeWgt();
+
+    void setMapWindowBig(bool flag);
 private:
     Ui::MainWindow *ui;
     MapWidget *m_pMapWgt;
-    WayPointWgt m_wayPointWgt;
+    WayPointWgt *m_pWayPointWgt;
+    VideoWgt *m_pVideoWgt;
 
     mapcontrol::UAVItem         *m_uav;
 

@@ -3,20 +3,22 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    m_pMapWgt(new MapWidget(this)),
+    m_pWayPointWgt(new WayPointWgt(this)),
+    m_pVideoWgt(new VideoWgt(this))
 {
 
     m_conf = new QSettings(QCoreApplication::applicationDirPath() + "/data/myDemo.ini", QSettings::IniFormat);
     ui->setupUi(this);
 
-    m_pMapWgt = new MapWidget(this);
+    m_pMapWgt->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    m_pMapWgt->setMinimumHeight(300);
+    setMapWindowBig(false);
 
-    m_pMapWgt->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    ui->hLayout2->insertWidget(0,m_pMapWgt);
-    ui->hLayout2->insertWidget(1,&m_wayPointWgt);
-
-    m_pMapWgt->SetShowUAV(true);
+    //m_pMapWgt->SetShowUAV(true);
     m_pMapWgt->SetShowHome(true);
+    m_pMapWgt->SetShowCompass(false);
     m_pMapWgt->SetUseOpenGL(false);
 
     m_uav = m_pMapWgt->AddUAV(0);
@@ -29,7 +31,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     lat  = m_conf->value("mapWidget_home_lat", 30).toDouble();
     lng  = m_conf->value("mapWidget_home_lng", 104).toDouble();
-    zoom = m_conf->value("lastZoom", 3).toInt();
+    zoom = m_conf->value("lastZoom", 9).toInt();
 
     internals::PointLatLng p(lat, lng);
     m_pMapWgt->SetCurrentPosition(p);
@@ -142,18 +144,40 @@ void MainWindow::hideAllWorkModeWgt()
     ui->freedomWgt->setVisible(false);
 }
 
+void MainWindow::setMapWindowBig(bool flag)
+{
+    if (flag)
+    {
+        ui->centerHLayout->insertWidget(0,m_pMapWgt);
+        m_pMapWgt->setMaximumHeight(16777215);
+        m_pVideoWgt->setMaximumHeight(300);
+        ui->rightVLayout->insertWidget(0,m_pVideoWgt);
+        ui->rightVLayout->insertWidget(1,m_pWayPointWgt);
+    }
+    else
+    {
+        ui->centerHLayout->insertWidget(0,m_pVideoWgt);
+        m_pMapWgt->setMaximumHeight(300);
+        m_pVideoWgt->setMaximumHeight(16777215);
+        ui->rightVLayout->insertWidget(0,m_pMapWgt);
+        ui->rightVLayout->insertWidget(1,m_pWayPointWgt);
+    }
+}
+
 void MainWindow::on_mainPageBtn_clicked(bool checked)
 {
     if (checked)
     {
-        ui->bottomWgt->setVisible(false);
+        //ui->bottomWgt->setVisible(false);
         //m_pMapWgt->setVisible(true);
         ui->mainPageBtn->setText(tr("航路规划"));
+        setMapWindowBig(true);
     }
     else
     {
-        ui->bottomWgt->setVisible(true);
+        //ui->bottomWgt->setVisible(true);
         //m_pMapWgt->setVisible(false);
         ui->mainPageBtn->setText(tr("主界面"));
+        setMapWindowBig(false);
     }
 }

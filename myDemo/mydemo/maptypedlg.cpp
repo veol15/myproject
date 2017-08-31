@@ -16,11 +16,11 @@ static MapType_Data g_arrMapType[] =
     MAPTYPE_STRUCT(GaoDeLabels),
     MAPTYPE_STRUCT(GaoDeHybrid),
 
-    MAPTYPE_STRUCT(GoogleMap),
-    MAPTYPE_STRUCT(GoogleSatellite),
-    MAPTYPE_STRUCT(GoogleLabels),
-    MAPTYPE_STRUCT(GoogleTerrain),
-    MAPTYPE_STRUCT(GoogleHybrid),
+//    MAPTYPE_STRUCT(GoogleMap),
+//    MAPTYPE_STRUCT(GoogleSatellite),
+//    MAPTYPE_STRUCT(GoogleLabels),
+//    MAPTYPE_STRUCT(GoogleTerrain),
+//    MAPTYPE_STRUCT(GoogleHybrid),
 
     MAPTYPE_STRUCT(GoogleMapChina),
     MAPTYPE_STRUCT(GoogleSatelliteChina),
