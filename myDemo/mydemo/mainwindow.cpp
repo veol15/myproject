@@ -39,8 +39,12 @@ MainWindow::MainWindow(QWidget *parent) :
     m_pMapWgt->setConf(m_conf);
 
     setCurWorkMode(returnVoyage);
+    connectMapWgtSignal();
 }
-
+void MainWindow::connectMapWgtSignal()
+{
+    connect(m_pMapWgt, &MapWidget::signalAddWPItem, this, &MainWindow::on_addWPItem);
+}
 MainWindow::~MainWindow()
 {
     delete ui;
@@ -180,4 +184,17 @@ void MainWindow::on_mainPageBtn_clicked(bool checked)
         ui->mainPageBtn->setText(tr("主界面"));
         setMapWindowBig(false);
     }
+}
+
+void MainWindow::on_addWPItem(int num, WayPointItem *wpItem)
+{
+    qDebug()<<__FILE__<<__LINE__
+           <<"num:"<<wpItem->Number()
+           <<"Altitude:"<<wpItem->Altitude()
+           <<"lat:"<<wpItem->Coord().Lat()
+           <<"lng:"<<wpItem->Coord().Lng();
+    WayPointItemWgt *wgt = new WayPointItemWgt(this);
+    wgt->setTitle(QString("航点%1").arg(num));
+    wgt->setInfo(wpItem);
+    m_pWayPointWgt->setWPItem(wgt);
 }

@@ -28,26 +28,22 @@ public:
 
 public slots:
     void map_mouseMoveEvent(QMouseEvent *event);
+    void on_addWPItem(int num, WayPointItem *wpItem);
 protected:
     QSettings   *m_conf;
 private slots:
     void on_cacheMapBtn_clicked();
-
     void on_returnVoyageBtn_clicked();
-
     void on_circleBtn_clicked();
-
     void on_freedomBtn_clicked();
-
     void on_cruiseBtn_clicked();
-
     void on_hoverBtn_clicked();
-
-    void on_mainPageBtn_clicked(bool checked);
+    void on_mainPageBtn_clicked(bool checked);    
 
 private:
     void setCurWorkMode(workMode mode);
     void hideAllWorkModeWgt();
+    void connectMapWgtSignal();
 
     void setMapWindowBig(bool flag);
 private:
@@ -57,7 +53,6 @@ private:
     VideoWgt *m_pVideoWgt;
 
     mapcontrol::UAVItem         *m_uav;
-
 };
 
 #endif // MAINWINDOW_H

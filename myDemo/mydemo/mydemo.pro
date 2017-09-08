@@ -42,7 +42,8 @@ SOURCES += \
     maptypedlg.cpp \
     wpeditdlg.cpp \
     waypointwgt.cpp \
-    videowgt.cpp
+    videowgt.cpp \
+    waypointitemwgt.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -52,13 +53,15 @@ HEADERS += \
     maptypedlg.h \
     wpeditdlg.h \
     waypointwgt.h \
-    videowgt.h
+    videowgt.h \
+    waypointitemwgt.h
 
 FORMS += \
         mainwindow.ui \
     wayopwgt.ui \
     waypointwgt.ui \
-    videowgt.ui
+    videowgt.ui \
+    waypointitemwgt.ui
 
 OPMAPCONTROL_DIR = ../..
 INCLUDEPATH +=  $$OPMAPCONTROL_DIR \

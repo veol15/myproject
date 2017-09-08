@@ -37,7 +37,7 @@ public:
     }
 
 protected:
-    int         setupMenu(void);
+    int setupMenu(void);
 
 protected:
     QSettings   *m_conf;
@@ -74,7 +74,8 @@ protected:
     double                  m_flightHeight;         // default flight height
 
 signals:
-    void        HomeSet(void);
+    void HomeSet(void);
+    void signalAddWPItem(int num, WayPointItem *wp);
 
 public slots:
     void        actMapAccess_ServerAndCache(void);

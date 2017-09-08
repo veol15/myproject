@@ -12,3 +12,9 @@ WayPointWgt::~WayPointWgt()
 {
     delete ui;
 }
+
+void WayPointWgt::setWPItem(WayPointItemWgt *wgt)
+{
+    int n = ui->waypointItemWgtLayout->count();
+    ui->waypointItemWgtLayout->insertWidget(n-1,wgt);
+}

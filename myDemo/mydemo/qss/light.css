@@ -2,7 +2,7 @@ QPushButton
 {
     border: 1px solid rgb(44,140,244);
     color:  rgb(44,140,244);
-    min-height: 30px;
+    min-height: 20px;
     min-width: 40px;
 }
 QPushButton:hover
@@ -16,4 +16,17 @@ QWidget#topWgt
 QWidget#bottomWgt
 {
     background-color: rgb(228,234,244);
+}
+QWidget#wpBCWgt,QWidget#waypointItemWgt
+{
+    background-color: rgb(228,234,244);
+}
+QScrollArea#wpScrollArea
+{
+    border:none;
+}
+QWidget#edgeWgt
+{
+   border: 1px solid rgb(0,0,0);
+   background-color: rgb(0,234,244);
 }

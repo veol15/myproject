@@ -371,6 +371,7 @@ void MapWidget::actWaypoint_add(void)
 
     connect(wp, SIGNAL(WPEdit(int, WayPointItem*)),
             this, SLOT(actWPEdit(int, WayPointItem*)));
+    emit signalAddWPItem(WayPointItem::snumber, wp);
 }
 
 void MapWidget::actWaypoint_del(void)
