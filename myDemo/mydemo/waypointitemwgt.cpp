@@ -25,3 +25,27 @@ void WayPointItemWgt::setInfo(mapcontrol::WayPointItem *wpItem)
     ui->lngLabel->setText(QString::number(wpItem->Coord().Lng()));
     ui->altLabel->setText(QString::number(wpItem->Altitude()));
 }
+
+void WayPointItemWgt::on_actionCB_currentIndexChanged(int index)
+{
+    switch (index)
+    {
+    case mapcontrol::WayPointItem::wayPoint:
+
+        break;
+    case mapcontrol::WayPointItem::changeAltitude:
+
+        break;
+    case mapcontrol::WayPointItem::cycle:
+
+        break;
+    case mapcontrol::WayPointItem::returnVoyage:
+
+        break;
+    case mapcontrol::WayPointItem::jump:
+
+        break;
+    default:
+        break;
+    }
+}

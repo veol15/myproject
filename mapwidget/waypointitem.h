@@ -18,6 +18,16 @@ class WayPointItem : public QObject,public QGraphicsItem
 
 public:
     enum { Type = UserType + 1 };
+    enum ActionType
+    {
+        wayPoint,
+        changeAltitude,
+        flyAway,
+        cycle,
+        returnVoyage,
+        jump
+    };
+
     WayPointItem(internals::PointLatLng const& coord, double const& altitude, MapGraphicItem* map);
     WayPointItem(internals::PointLatLng const& coord,double const& altitude,QString const& description,MapGraphicItem* map);
 

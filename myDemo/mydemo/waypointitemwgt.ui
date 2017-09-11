@@ -58,7 +58,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QComboBox" name="comboBox">
+         <widget class="QComboBox" name="actionCB">
           <item>
            <property name="text">
             <string>航点</string>
@@ -109,9 +109,9 @@
       <item>
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
-        <widget class="QWidget" name="page">
+        <widget class="QWidget" name="wpPage">
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <property name="spacing">
            <number>6</number>
@@ -184,7 +184,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="page_2"/>
+        <widget class="QWidget" name="chgAltPage"/>
        </widget>
       </item>
      </layout>

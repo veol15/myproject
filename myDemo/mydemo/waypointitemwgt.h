@@ -18,6 +18,9 @@ public:
     void setTitle(const QString &title);
     void setInfo(mapcontrol::WayPointItem *wpItem);
 
+private slots:
+    void on_actionCB_currentIndexChanged(int index);
+
 private:
     Ui::WayPointItemWgt *ui;
     QString m_title;
