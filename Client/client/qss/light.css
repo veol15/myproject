@@ -1,0 +1,32 @@
+/*QPushButton
+{
+    border: 1px solid rgb(44,140,244);
+    color:  rgb(44,140,244);
+    min-height: 20px;
+    min-width: 40px;
+}
+QPushButton:hover
+{
+    color:  rgb(86,106,129);
+}*/
+QWidget#topWgt
+{
+    background-color: rgb(228,234,244);
+}
+QWidget#bottomWgt
+{
+    background-color: rgb(228,234,244);
+}
+QWidget#wpBCWgt,QWidget#waypointItemWgt
+{
+    background-color: rgb(228,234,244);
+}
+QScrollArea#wpScrollArea
+{
+    border:none;
+}
+QWidget#edgeWgt
+{
+   border: 1px solid rgb(0,0,0);
+   background-color: rgb(0,234,244);
+}
